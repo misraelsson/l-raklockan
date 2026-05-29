@@ -1,0 +1,5 @@
+# Google AdSense ads.txt-mall för läraklockan.se
+# Ersätt "YOUR_PUBLISHER_ID_HERE" med ditt faktiska utgivar-ID (t.ex. pub-1234567890123456)
+# som du får från din Google AdSense-kontopanel när du har skapat kontot.
+
+google.com, pub-YOUR_PUBLISHER_ID_HERE, DIRECT, f08c47fec0942fa0

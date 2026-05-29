@@ -533,6 +533,45 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* --- Annons-sektion (Google AdSense) --- */
+.ads-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  page-break-inside: avoid;
+}
+
+.ad-placeholder {
+  background: var(--card-bg);
+  border: 1px dashed var(--card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 760px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  overflow: hidden;
+  transition: border-color var(--transition-speed), background var(--transition-speed);
+}
+
+.ad-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
 /* --- Utskriftsstilar (Skolblad / Övningsblad) --- */
 @media print {
   /* Skapa en utskriftsheader för elever */
@@ -568,7 +607,8 @@ footer a:hover {
   .control-panel, 
   footer, 
   .theme-toggle-btn,
-  .clock-badge {
+  .clock-badge,
+  .ads-container {
     display: none !important;
   }
 
