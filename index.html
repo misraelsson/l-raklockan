@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Klockan - Slumpa analoga klockor (Lär dig klockan)</title>
+  <meta name="title" content="Klockan - Slumpa analoga klockor (Lär dig klockan)">
+  <meta name="description" content="Ett interaktivt verktyg för att träna på analoga klockor. Slumpa 9 klockor i svårighetsgrader som hela timmar, halvtimmar, kvartar eller 5-minuterssteg. Skriv ut övningsblad!">
+  <meta name="keywords" content="lära sig klockan, analog klocka, slumpa klockor, övningsblad klockan, digital klocka, skolmaterial, pedagogiskt verktyg">
+  <meta name="author" content="Antigravity">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Klockan - Slumpa analoga klockor">
+  <meta property="og:description" content="Generera analoga klockor med slumpmässiga klockslag. Träna själv eller skriv ut vackra övningsblad till elever/barn.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=1200&h=630&q=80">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="header-title-area">
+        <h1>Klockgeneratorn</h1>
+        <p>Generera slumpmässiga analoga klockor för att träna och lära dig klockan</p>
+      </div>
+      
+      <!-- Ljust/Mörkt tema knapp -->
+      <button id="themeToggle" class="theme-toggle-btn" aria-label="Växla mellan ljust och mörkt läge" title="Växla tema">
+        <!-- Sol-ikon (visas i mörkt läge) -->
+        <svg class="sun-icon" viewBox="0 0 24 24">
+          <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7z M2,13h2c0.55,0,1-0.45,1-1s-0.45-1-1-1H2c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13h2c0.55,0,1-0.45,1-1s-0.45-1-1-1h-2c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1S11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0s-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0s-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L18.36,16.95z M7.05,18.36l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0l1.06-1.06c0.39-0.39,0.39-1.03,0-1.41S7.44,17.97,7.05,18.36z M16.95,5.99l1.06-1.06c0.39-0.39,0.39-1.03,0-1.41s-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41S16.56,6.38,16.95,5.99z"/>
+        </svg>
+        <!-- Måne-ikon (visas i ljust läge) -->
+        <svg class="moon-icon" viewBox="0 0 24 24">
+          <path d="M12.3,2a10,10,0,0,0-1.9,19.5,8,8,0,0,1,8-8,8.1,8.1,0,0,1,3-1.6A10,10,0,0,0,12.3,2Z"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Kontrollpanel -->
+    <section class="control-panel" aria-label="Inställningar för klockgenerering">
+      
+      <!-- Svårighetsgrad -->
+      <div class="control-group">
+        <span class="control-label">Välj svårighetsgrad / intervall:</span>
+        <div class="options-grid">
+          
+          <div class="option-card">
+            <input type="radio" id="intervalHours" name="interval" value="hours" checked>
+            <label for="intervalHours" class="option-label">Endast hela timmar<br>(t.ex. 3:00)</label>
+          </div>
+          
+          <div class="option-card">
+            <input type="radio" id="intervalHalf" name="interval" value="half">
+            <label for="intervalHalf" class="option-label">Hel- och halvtimmar<br>(t.ex. 3:00, 3:30)</label>
+          </div>
+          
+          <div class="option-card">
+            <input type="radio" id="intervalQuarter" name="interval" value="quarter">
+            <label for="intervalQuarter" class="option-label">Hel, halv och kvart<br>(t.ex. 3:15, 3:45)</label>
+          </div>
+          
+          <div class="option-card">
+            <input type="radio" id="intervalFive" name="interval" value="five">
+            <label for="intervalFive" class="option-label">Alla 5-minutersintervaller<br>(t.ex. 3:20, 3:55)</label>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Knappar och Växlar -->
+      <div class="action-buttons">
+        <div class="btn-group-left">
+          
+          <!-- Huvudknapp: Slumpa nya -->
+          <button id="randomizeBtn" class="btn btn-primary" title="Slumpa fram 9 nya klockor">
+            <svg viewBox="0 0 24 24">
+              <path d="M17.65,6.35C16.2,4.9,14.21,4,12,4c-4.42,0-7.99,3.58-7.99,8s3.57,8,7.99,8c3.73,0,6.84-2.55,7.73-6h-2.08c-0.82,2.33-3.04,4-5.65,4c-3.31,0-6-2.69-6-6s2.69-6,6-6c1.66,0,3.14,0.69,4.22,1.78L13,11h7V4L17.65,6.35z"/>
+            </svg>
+            Slumpa nya klockor
+          </button>
+          
+          <!-- Skriv ut-knapp -->
+          <button id="printBtn" class="btn btn-secondary" title="Öppna utskriftsvyn för att skriva ut eller spara som PDF">
+            <svg viewBox="0 0 24 24">
+              <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+            </svg>
+            Skriv ut övningsblad
+          </button>
+          
+        </div>
+        
+        <!-- Visa/Dölj svar växling -->
+        <div class="toggle-switch-container" title="Visa eller dölj det digitala och textbaserade svaret för alla klockor direkt">
+          <span class="switch-label-text">Visa alla svar direkt</span>
+          <label class="switch">
+            <input type="checkbox" id="answerSwitch">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- Grid med klockor -->
+    <main id="clocksGrid" class="clocks-grid" aria-label="Slumpade analoga klockor">
+      <!-- Genereras dynamiskt via app.js -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>Skapad med precision av <a href="#" target="_blank" rel="noopener">Antigravity</a> &copy; 2026. Perfekt för skolan, hemmaträning eller läxhjälp.</p>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
