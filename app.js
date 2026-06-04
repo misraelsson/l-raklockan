@@ -172,7 +172,7 @@ function createClockSVG(hour, minute) {
 }
 
 // Skapa ett klockkort (DOM-struktur)
-function createClockCard(index, time, showAllAnswers) {
+function createClockCard(index, time) {
   const card = document.createElement("div");
   card.className = "clock-card";
   
@@ -189,48 +189,9 @@ function createClockCard(index, time, showAllAnswers) {
   clockContainer.appendChild(clockSVG);
   card.appendChild(clockContainer);
   
-  // Svars-sektion
+  // Skapa en tom svars-sektion för att bevara utskriftslinjen i CSS (@media print)
   const answerArea = document.createElement("div");
   answerArea.className = "answer-area";
-  
-  // Avslöja-knapp (används när svar döljs)
-  const revealBtn = document.createElement("button");
-  revealBtn.className = "answer-card-reveal-btn";
-  revealBtn.textContent = "Visa svar";
-  
-  // Digitalt och svenskt text-svar
-  const answerDetails = document.createElement("div");
-  answerDetails.className = "answer-details";
-  
-  const digitalTimeText = document.createElement("div");
-  digitalTimeText.className = "digital-time";
-  
-  // Formatera HH:MM med ledande nolla
-  const formattedHour = String(time.hour).padStart(2, '0');
-  const formattedMin = String(time.minute).padStart(2, '0');
-  digitalTimeText.textContent = `${formattedHour}:${formattedMin}`;
-  
-  const swedishText = document.createElement("div");
-  swedishText.className = "swedish-text-time";
-  swedishText.textContent = getSwedishTimeText(time.hour, time.minute);
-  
-  answerDetails.appendChild(digitalTimeText);
-  answerDetails.appendChild(swedishText);
-  
-  // Lägg till element i svarsbehållaren baserat på global inställning
-  if (showAllAnswers) {
-    revealBtn.classList.add("hidden");
-  } else {
-    answerDetails.classList.add("hidden");
-  }
-  
-  revealBtn.addEventListener("click", () => {
-    revealBtn.classList.add("hidden");
-    answerDetails.classList.remove("hidden");
-  });
-  
-  answerArea.appendChild(revealBtn);
-  answerArea.appendChild(answerDetails);
   card.appendChild(answerArea);
   
   return card;
@@ -239,7 +200,6 @@ function createClockCard(index, time, showAllAnswers) {
 // Huvudtillstånd för appen
 const state = {
   selectedIntervals: ["hours"], // Standard: hela timmar markerat
-  showAllAnswers: false,        // Standard: dölj svar
   clocksData: []                // Sparar de 9 slumpade tiderna
 };
 
@@ -299,7 +259,7 @@ function generateAndRenderClocks() {
     const time = getRandomTimeForLevel(level);
     state.clocksData.push(time);
     
-    const card = createClockCard(i, time, state.showAllAnswers);
+    const card = createClockCard(i, time);
     grid.appendChild(card);
   }
 }
@@ -351,32 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  // 3. Svara-visa switch
-  const answerSwitch = document.getElementById("answerSwitch");
-  if (answerSwitch) {
-    answerSwitch.addEventListener("change", (e) => {
-      state.showAllAnswers = e.target.checked;
-      
-      const cards = document.querySelectorAll(".clock-card");
-      cards.forEach((card, idx) => {
-        const revealBtn = card.querySelector(".answer-card-reveal-btn");
-        const details = card.querySelector(".answer-details");
-        
-        if (state.showAllAnswers) {
-          if (revealBtn) revealBtn.classList.add("hidden");
-          if (details) details.classList.remove("hidden");
-        } else {
-          if (revealBtn) revealBtn.classList.remove("hidden");
-          if (details) details.classList.add("hidden");
-        }
-      });
-    });
-    
-    // Synkronisera initialt läge
-    state.showAllAnswers = answerSwitch.checked;
-  }
-  
-  // 4. Skriv-ut knapp
+  // 3. Skriv-ut knapp
   const printBtn = document.getElementById("printBtn");
   if (printBtn) {
     printBtn.addEventListener("click", () => {
