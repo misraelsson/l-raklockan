@@ -266,6 +266,12 @@ function generateAndRenderClocks() {
 
 // Initiera applikationen när DOM laddats
 document.addEventListener("DOMContentLoaded", () => {
+  // Sätt dagens datum i utskriftsheadern (t.ex. 2026-06-04)
+  const printDateSpan = document.getElementById("printDate");
+  if (printDateSpan) {
+    printDateSpan.textContent = new Date().toLocaleDateString('sv-SE');
+  }
+
   // 1. Sätt upp lyssnare för kryssrutor (svårighetsgrad)
   const checkboxInputs = document.querySelectorAll('.interval-checkbox');
   

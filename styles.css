@@ -572,21 +572,35 @@ footer a:hover {
   margin-bottom: 0.5rem;
 }
 
+/* --- Utskriftsheader (dold på skärmen) --- */
+.print-only-header {
+  display: none;
+}
+
 /* --- Utskriftsstilar (Skolblad / Övningsblad) --- */
 @media print {
-  /* Skapa en utskriftsheader för elever */
-  body::before {
-    content: "Klockan - Övningsblad \A Namn: ___________________________   Datum: ______________";
-    white-space: pre-wrap;
-    display: block;
+  /* Skapa en utskriftsheader */
+  .print-only-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-end;
     font-family: 'Outfit', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #000;
     margin-bottom: 2rem;
     width: 100%;
     border-bottom: 2px solid #000;
-    padding-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .print-url {
+    font-size: 1.4rem;
+  }
+
+  .print-date {
+    font-size: 1.1rem;
+    font-weight: 500;
   }
 
   body {
