@@ -729,10 +729,10 @@ footer a:hover {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1rem;
   }
-}
 
-@media (max-width: 480px) {
-  .options-grid {
-    grid-template-columns: 1fr;
+  .option-label {
+    font-size: 0.85rem;
+    padding: 0.75rem 0.5rem;
+    min-height: 48px;
   }
 }
