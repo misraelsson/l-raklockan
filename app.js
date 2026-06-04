@@ -55,37 +55,40 @@ function getSwedishTimeText(hour, minute) {
   return `${currentHourText} och ${minute} minuter`;
 }
 
-// Slumpa en tid baserat på valt svårighetsintervall
-function getRandomTime(intervalType) {
-  // Slumpa timme (0-23)
+// Slumpa en tid för en specifik svårighetsgrad
+function getRandomTimeForLevel(level) {
   const hour = Math.floor(Math.random() * 24);
   let minute = 0;
   
-  switch (intervalType) {
+  switch (level) {
     case "hours":
-      // Endast hela timmar (t.ex. 00)
       minute = 0;
       break;
-      
     case "half":
-      // Hel- och halvtimmar (00 eller 30)
-      minute = Math.random() < 0.5 ? 0 : 30;
+      minute = 30;
       break;
-      
     case "quarter":
-      // Hel, halv och kvart (00, 15, 30, 45)
-      const quarters = [0, 15, 30, 45];
+      const quarters = [15, 45];
       minute = quarters[Math.floor(Math.random() * quarters.length)];
       break;
-      
     case "five":
-    default:
-      // Alla 5-minutersintervaller (0, 5, 10, ..., 55)
-      minute = Math.floor(Math.random() * 12) * 5;
+      const fives = [5, 10, 20, 25, 35, 40, 50, 55];
+      minute = fives[Math.floor(Math.random() * fives.length)];
       break;
+    default:
+      minute = 0;
   }
   
   return { hour, minute };
+}
+
+// Hjälpfunktion för att blanda en array (Fisher-Yates)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 // Skapa SVG för urtavlan
@@ -235,12 +238,12 @@ function createClockCard(index, time, showAllAnswers) {
 
 // Huvudtillstånd för appen
 const state = {
-  currentInterval: "hours", // Standard: endast hela timmar
-  showAllAnswers: false,    // Standard: dölj svar
-  clocksData: []            // Sparar de 9 slumpade tiderna
+  selectedIntervals: ["hours"], // Standard: hela timmar markerat
+  showAllAnswers: false,        // Standard: dölj svar
+  clocksData: []                // Sparar de 9 slumpade tiderna
 };
 
-// Generera och rita upp 9 nya klockor
+// Generera och rita upp 9 nya klockor med smart distribution
 function generateAndRenderClocks() {
   const grid = document.getElementById("clocksGrid");
   if (!grid) return;
@@ -248,8 +251,52 @@ function generateAndRenderClocks() {
   grid.innerHTML = "";
   state.clocksData = [];
   
+  // 1. Sortera de valda intervallerna efter svårighetsgrad
+  const difficultyOrder = ["hours", "half", "quarter", "five"];
+  const activeLevels = difficultyOrder.filter(level => state.selectedIntervals.includes(level));
+  
+  // Om inget är valt av någon anledning, välj "hours" som reserv
+  if (activeLevels.length === 0) {
+    activeLevels.push("hours");
+  }
+  
+  // 2. Bestäm fördelningen av de 9 urtavlorna
+  let levelDistribution = [];
+  const k = activeLevels.length;
+  
+  if (k === 1) {
+    // 9 av samma
+    levelDistribution = Array(9).fill(activeLevels[0]);
+  } else if (k === 2) {
+    // 3 lättare, 6 svårare
+    levelDistribution = [
+      ...Array(3).fill(activeLevels[0]),
+      ...Array(6).fill(activeLevels[1])
+    ];
+  } else if (k === 3) {
+    // 2 lättaste, 3 mellersta, 4 svåraste
+    levelDistribution = [
+      ...Array(2).fill(activeLevels[0]),
+      ...Array(3).fill(activeLevels[1]),
+      ...Array(4).fill(activeLevels[2])
+    ];
+  } else if (k === 4) {
+    // 1-2-2-4 fördelning
+    levelDistribution = [
+      ...Array(1).fill(activeLevels[0]),
+      ...Array(2).fill(activeLevels[1]),
+      ...Array(2).fill(activeLevels[2]),
+      ...Array(4).fill(activeLevels[3])
+    ];
+  }
+  
+  // 3. Blanda fördelningen så att klockorna inte alltid visas i ordning
+  shuffleArray(levelDistribution);
+  
+  // 4. Skapa och rendera klockkorten
   for (let i = 1; i <= 9; i++) {
-    const time = getRandomTime(state.currentInterval);
+    const level = levelDistribution[i - 1];
+    const time = getRandomTimeForLevel(level);
     state.clocksData.push(time);
     
     const card = createClockCard(i, time, state.showAllAnswers);
@@ -259,21 +306,35 @@ function generateAndRenderClocks() {
 
 // Initiera applikationen när DOM laddats
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Sätt upp lyssnare för radioknappar (svårighetsgrad)
-  const radioInputs = document.querySelectorAll('input[name="interval"]');
-  radioInputs.forEach(input => {
-    input.addEventListener("change", (e) => {
-      if (e.target.checked) {
-        state.currentInterval = e.target.value;
-        generateAndRenderClocks();
+  // 1. Sätt upp lyssnare för kryssrutor (svårighetsgrad)
+  const checkboxInputs = document.querySelectorAll('.interval-checkbox');
+  
+  const updateSelectedIntervals = () => {
+    const selected = [];
+    checkboxInputs.forEach(input => {
+      if (input.checked) {
+        selected.push(input.value);
       }
     });
-    
-    // Synkronisera initialt val från HTML
-    if (input.checked) {
-      state.currentInterval = input.value;
-    }
+    state.selectedIntervals = selected;
+  };
+
+  checkboxInputs.forEach(input => {
+    input.addEventListener("change", (e) => {
+      // Förhindra att man klickar ur den sista svårighetsgraden
+      const checkedCount = document.querySelectorAll('.interval-checkbox:checked').length;
+      if (checkedCount === 0) {
+        e.target.checked = true; // tvinga att förbli ikryssad
+        return;
+      }
+      
+      updateSelectedIntervals();
+      generateAndRenderClocks();
+    });
   });
+  
+  // Synkronisera initialt läge
+  updateSelectedIntervals();
   
   // 2. Spara länk till "Slumpa nya klockor"-knappen
   const randomizeBtn = document.getElementById("randomizeBtn");
