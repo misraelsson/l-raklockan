@@ -79,9 +79,14 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   margin-bottom: 0.5rem;
+}
+
+.header-title-area {
+  flex: 1;
+  padding-right: 2rem;
 }
 
 .header-title-area h1 {
@@ -97,6 +102,23 @@ header {
 .header-title-area p {
   color: var(--text-secondary);
   font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.educational-text {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--card-shadow);
+}
+
+.educational-text p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .theme-toggle-btn {
@@ -523,6 +545,10 @@ footer {
   width: 100%;
 }
 
+footer p {
+  margin-bottom: 0.5rem;
+}
+
 footer a {
   color: var(--primary-color);
   text-decoration: none;
@@ -531,6 +557,45 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* --- Cookie Banner --- */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--card-bg);
+  border-top: 1px solid var(--card-border);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  gap: 1rem;
+}
+
+.cookie-banner p {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  margin: 0;
+  max-width: 800px;
+}
+
+.cookie-banner a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.cookie-banner .btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  min-height: auto;
+  white-space: nowrap;
 }
 
 /* --- Annons-sektion (Google AdSense) --- */
@@ -579,6 +644,10 @@ footer a:hover {
 
 /* --- Utskriftsstilar (Skolblad / Övningsblad) --- */
 @media print {
+  .cookie-banner {
+    display: none !important;
+  }
+
   /* Skapa en utskriftsheader */
   .print-only-header {
     display: flex !important;
@@ -701,10 +770,32 @@ footer a:hover {
     padding: 1rem 0.5rem;
   }
   
+  .header-title-area {
+    padding-right: 0;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
   .header-title-area h1 {
     font-size: 1.8rem;
   }
   
+  .cookie-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .cookie-banner .btn-small {
+    width: 100%;
+    justify-content: center;
+  }
+
   .control-panel {
     padding: 1rem;
     gap: 1rem;

@@ -350,6 +350,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   
-  // 6. Rita upp första klockorna
+  // 6. Cookie banner logik
+  const cookieBanner = document.getElementById("cookieBanner");
+  const acceptCookiesBtn = document.getElementById("acceptCookies");
+
+  if (cookieBanner && acceptCookiesBtn) {
+    // Kolla om användaren redan har godkänt
+    const hasAccepted = localStorage.getItem("cookieConsent");
+
+    if (!hasAccepted) {
+      // Ta bort hidden-klassen så att den visas
+      cookieBanner.classList.remove("hidden");
+    }
+
+    // När man klickar på "Jag förstår"
+    acceptCookiesBtn.addEventListener("click", () => {
+      localStorage.setItem("cookieConsent", "true");
+      cookieBanner.classList.add("hidden");
+    });
+  }
+
+  // 7. Rita upp första klockorna
   generateAndRenderClocks();
 });
