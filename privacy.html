@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integritetspolicy & Cookies - Läraklockan.se</title>
+  <meta name="description" content="Information om vår integritetspolicy och hur vi använder cookies.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .privacy-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      margin-top: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .privacy-container h1 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+    .privacy-container h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .privacy-container p, .privacy-container ul {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .privacy-container ul {
+      padding-left: 1.5rem;
+    }
+    .privacy-container a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    .privacy-container a:hover {
+      text-decoration: underline;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--primary-hover);
+    }
+    .back-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <div class="container">
+    <header>
+      <div class="header-title-area">
+        <a href="index.html" class="back-link">
+          <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          Tillbaka till Klockgeneratorn
+        </a>
+      </div>
+
+      <!-- Ljust/Mörkt tema knapp -->
+      <button id="themeToggle" class="theme-toggle-btn" aria-label="Växla mellan ljust och mörkt läge" title="Växla tema">
+        <svg class="sun-icon" viewBox="0 0 24 24">
+          <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7z M2,13h2c0.55,0,1-0.45,1-1s-0.45-1-1-1H2c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13h2c0.55,0,1-0.45,1-1s-0.45-1-1-1h-2c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1S11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0s-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0s-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L18.36,16.95z M7.05,18.36l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0l1.06-1.06c0.39-0.39,0.39-1.03,0-1.41S7.44,17.97,7.05,18.36z M16.95,5.99l1.06-1.06c0.39-0.39,0.39-1.03,0-1.41s-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41S16.56,6.38,16.95,5.99z"/>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24">
+          <path d="M12.3,2a10,10,0,0,0-1.9,19.5,8,8,0,0,1,8-8,8.1,8.1,0,0,1,3-1.6A10,10,0,0,0,12.3,2Z"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="privacy-container">
+      <h1>Integritetspolicy & Cookies</h1>
+      <p>Senast uppdaterad: Juni 2026</p>
+
+      <h2>1. Allmänt</h2>
+      <p>På läraklockan.se värnar vi om din integritet. Denna sida beskriver hur vi hanterar information och användningen av cookies när du besöker vår webbplats.</p>
+
+      <h2>2. Personuppgifter</h2>
+      <p>Vi samlar inte in några personliga uppgifter som namn, e-postadress eller telefonnummer från våra besökare. Vårt verktyg är helt anonymt att använda.</p>
+
+      <h2>3. Användning av Cookies</h2>
+      <p>Vi använder cookies för att förbättra din upplevelse på sidan, förstå hur sidan används och för att kunna visa relevanta annonser. En cookie är en liten textfil som sparas i din webbläsare.</p>
+      <ul>
+        <li><strong>Nödvändiga cookies:</strong> Används för att spara dina inställningar, till exempel ditt val av ljust eller mörkt tema, samt ditt samtycke till cookies.</li>
+        <li><strong>Analys-cookies (Google Analytics):</strong> Används för att anonymt samla in statistik om hur besökare använder sidan, så att vi kan förbättra den.</li>
+        <li><strong>Annons-cookies (Google AdSense):</strong> Vi använder tredjepartsleverantörer, inklusive Google, som använder cookies för att visa annonser baserat på användares tidigare besök på denna och andra webbplatser.</li>
+      </ul>
+
+      <h2>4. Google AdSense & Annonsering</h2>
+      <p>Googles användning av annonscookies gör det möjligt för dem och deras partner att visa annonser för våra användare baserat på deras besök på våra webbplatser och/eller andra webbplatser på internet.</p>
+      <p>Du kan välja bort anpassad annonsering genom att besöka <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Inställningar för annonser</a>.</p>
+
+      <h2>5. Hantera Cookies</h2>
+      <p>Du kan när som helst ändra inställningarna i din webbläsare för att blockera cookies eller radera befintliga cookies. Var medveten om att vissa funktioner på sidan (t.ex. sparat tema) kan sluta fungera om du inaktiverar cookies helt.</p>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 www.läraklockan.se. Perfekt för skolan, hemmaträning eller läxhjälp.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Förenklad app.js logik för bara tema-knappen på privacy-sidan
+    document.addEventListener("DOMContentLoaded", () => {
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const currentTheme = document.body.getAttribute("data-theme");
+          const newTheme = currentTheme === "dark" ? "light" : "dark";
+          document.body.setAttribute("data-theme", newTheme);
+          localStorage.setItem("clock-theme", newTheme);
+        });
+
+        const savedTheme = localStorage.getItem("clock-theme");
+        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme) {
+          document.body.setAttribute("data-theme", savedTheme);
+        } else if (systemPrefersDark) {
+          document.body.setAttribute("data-theme", "dark");
+        } else {
+          document.body.setAttribute("data-theme", "light");
+        }
+      }
+    });
+  </script>
+</body>
+</html>
